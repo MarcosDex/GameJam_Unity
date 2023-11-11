@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8923420494621310249}
   - component: {fileID: 462871393812301881}
   - component: {fileID: 6469888016140841958}
-  - component: {fileID: 5292372983386940945}
   m_Layer: 0
   m_Name: Zac_01 1
   m_TagString: Untagged
@@ -98,20 +97,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5292372983386940945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 14047709098030800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb5a4e60ec51a2144924db53a407b22a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  cameraTransform: {fileID: 1300805040530962973}
 --- !u!1 &1300805040530962968
 GameObject:
   m_ObjectHideFlags: 0
