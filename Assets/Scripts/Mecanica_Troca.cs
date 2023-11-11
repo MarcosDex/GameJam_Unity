@@ -4,31 +4,15 @@ using UnityEngine;
 
 public class Mecanica_Troca : MonoBehaviour
 {
-    public GameObject objetoOriginal;
-    public GameObject novoObjecto;
- 
+    
+    // Referência ao script GameManager
+    public GameManager GameManager;
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            trocarObjeto();
-        }
+        // Exemplo de como obter o valor de seeds
+        int valorSeeds = GameManager.seeds;
+        Debug.Log("Valor de seeds em OutroScript: " + valorSeeds);
     }
 
-    void trocarObjeto()
-    {
-        Vector3 posicao = objetoOriginal.transform.position;
-        Quaternion rotacao = objetoOriginal.transform.rotation;
-
-        // Destroi o objeto original
-        Destroy(objetoOriginal);
-
-        // Instancia o novo objeto na mesma posição e rotação
-        GameObject novoObjeto = Instantiate(novoObjecto, posicao, rotacao);
-
-        // Atualiza a referência do objeto original para o novo objeto
-        objetoOriginal = novoObjeto;
-    }
 }
