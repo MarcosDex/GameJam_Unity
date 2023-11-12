@@ -1,67 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(Rigidbody))]
+
 public class Zac_Moviment : MonoBehaviour
 {
     public float speed = 5.0f;
-    public Transform cameraTransform; // Referência à câmera
-    public float jumpforce = 3.0f;
-    public float mass = 3.0f;
-    private Rigidbody rigidbody;
-    private bool isGround = false;
+    private CharacterController characterController;
+    private Animator animator;
+    private Vector3 inputs;
 
-
-
-
-
-
-     void Start()
+    void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
-        rigidbody.mass= mass;
+        characterController = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
     }
-
-
 
     private void Update()
     {
-        //Horizontal e Vertical são respectivamente Cima e Baixo e Esquerda e Direta/ A  D, W  S
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        inputs.Set(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        characterController.Move(inputs * Time.deltaTime * speed);
 
-        Vector3 movement = new Vector3(horizontalInput, 0, verticalInput) * speed * Time.deltaTime;
-
-        transform.Translate(movement);
-
-
-        if (cameraTransform != null)
+        if (inputs != Vector3.zero)
         {
-            // Mantenha a posição da câmera em relação ao personagem
-            cameraTransform.position = transform.position + new Vector3(0, 2, -5); 
+            // Verifica se o movimento é predominantemente horizontal ou vertical
+            bool isHorizontalMovement = Mathf.Abs(inputs.x) > Mathf.Abs(inputs.z);
+
+            animator.SetBool("Andando", true);
+
+            // Se o movimento for predominantemente horizontal, ajusta apenas o eixo X
+            // Se for vertical, ajusta apenas o eixo Z
+            float targetAngle = isHorizontalMovement ? Mathf.Atan2(inputs.x, 0) : Mathf.Atan2(0, inputs.z);
+            transform.rotation = Quaternion.Euler(0, targetAngle * Mathf.Rad2Deg, 0);
         }
-
-        if (!Input.GetKeyDown(KeyCode.Space) || !isGround)
-            return;
-
-        //Adicionamos uma força ao Rigidbody
-        rigidbody.AddForce(
-            Vector3.up * jumpforce, //Para fazer o personagem pular, então multiplicamos (0, 1, 0) pelo valor do pulo
-            ForceMode.Impulse // Ajustamos a força para o tipo Impulse
-            );
-    }
-
-    //Verifica se o personagem tocou no chão
-    void OnCollisionEnter(Collision collision)
-    {
-        isGround = true;
-    }
-
-    //Verifica se o personagem saiu do chão
-    void OnCollisionExit(Collision collision)
-    {
-        isGround = false;
+        else
+        {
+            animator.SetBool("Andando", false);
+        }
     }
 }
-
-
