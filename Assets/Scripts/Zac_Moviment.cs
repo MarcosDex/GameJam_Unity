@@ -5,6 +5,7 @@ using UnityEngine;
 public class Zac_Moviment : MonoBehaviour
 {
     public float speed = 5.0f;
+    public float rotationSpeed = 10.0f; // Nova variável para controlar a velocidade de rotação
     private CharacterController characterController;
     private Animator animator;
     private Vector3 inputs;
@@ -18,19 +19,21 @@ public class Zac_Moviment : MonoBehaviour
     private void Update()
     {
         inputs.Set(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        inputs.Normalize();
         characterController.Move(inputs * Time.deltaTime * speed);
 
         if (inputs != Vector3.zero)
         {
-            // Verifica se o movimento é predominantemente horizontal ou vertical
-            bool isHorizontalMovement = Mathf.Abs(inputs.x) > Mathf.Abs(inputs.z);
-
             animator.SetBool("Andando", true);
 
-            // Se o movimento for predominantemente horizontal, ajusta apenas o eixo X
-            // Se for vertical, ajusta apenas o eixo Z
-            float targetAngle = isHorizontalMovement ? Mathf.Atan2(inputs.x, 0) : Mathf.Atan2(0, inputs.z);
-            transform.rotation = Quaternion.Euler(0, targetAngle * Mathf.Rad2Deg, 0);
+            // Calcular o ângulo desejado
+            float targetAngle = Mathf.Atan2(inputs.x, inputs.z) * Mathf.Rad2Deg;
+
+            // Suavizar a rotação usando Lerp
+            float angle = Mathf.LerpAngle(transform.eulerAngles.y, targetAngle, Time.deltaTime * rotationSpeed);
+
+            // Aplicar a rotação suavizada
+            transform.rotation = Quaternion.Euler(0, angle, 0);
         }
         else
         {
