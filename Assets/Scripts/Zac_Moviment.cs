@@ -1,67 +1,68 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 [RequireComponent(typeof(Rigidbody))]
 public class Zac_Moviment : MonoBehaviour
 {
     public float speed = 5.0f;
-    public Transform cameraTransform; // ReferÍncia ‡ c‚mera
     public float jumpforce = 3.0f;
     public float mass = 3.0f;
+    public float sensitivity = 2.0f; // Sensibilidade do mouse
     private Rigidbody rigidbody;
     private bool isGround = false;
+    private float rotationX = 0.0f;
 
-
-
-
-
-
-     void Start()
+    void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        rigidbody.mass= mass;
+        rigidbody.mass = mass;
+
+        // Bloquear e esconder o cursor do mouse
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
-
-
 
     private void Update()
     {
-        //Horizontal e Vertical s„o respectivamente Cima e Baixo e Esquerda e Direta/ A  D, W  S
+        // Movimenta√ß√£o do jogador
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-
         Vector3 movement = new Vector3(horizontalInput, 0, verticalInput) * speed * Time.deltaTime;
-
         transform.Translate(movement);
 
+        // Rota√ß√£o da c√¢mera com o mouse
+        RotateWithMouse();
 
-        if (cameraTransform != null)
+        // Pulo do jogador
+        if (Input.GetKeyDown(KeyCode.Space) && isGround)
         {
-            // Mantenha a posiÁ„o da c‚mera em relaÁ„o ao personagem
-            cameraTransform.position = transform.position + new Vector3(0, 2, -5); 
+            rigidbody.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
         }
-
-        if (!Input.GetKeyDown(KeyCode.Space) || !isGround)
-            return;
-
-        //Adicionamos uma forÁa ao Rigidbody
-        rigidbody.AddForce(
-            Vector3.up * jumpforce, //Para fazer o personagem pular, ent„o multiplicamos (0, 1, 0) pelo valor do pulo
-            ForceMode.Impulse // Ajustamos a forÁa para o tipo Impulse
-            );
     }
 
-    //Verifica se o personagem tocou no ch„o
+    void RotateWithMouse()
+    {
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+
+        // Rota√ß√£o horizontal do corpo do jogador
+        transform.Rotate(Vector3.up * mouseX * sensitivity);
+
+        // Rota√ß√£o vertical da c√¢mera, limitando o √¢ngulo
+        rotationX -= mouseY * sensitivity;
+        rotationX = Mathf.Clamp(rotationX, 20.0f, 20.0f);
+    }
+
+    // Verifica se o personagem tocou no ch√£o
     void OnCollisionEnter(Collision collision)
     {
         isGround = true;
     }
 
-    //Verifica se o personagem saiu do ch„o
+    // Verifica se o personagem saiu do ch√£o
     void OnCollisionExit(Collision collision)
     {
         isGround = false;
     }
 }
-
-
