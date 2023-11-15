@@ -9,15 +9,19 @@ public class Zac_Moviment : MonoBehaviour
     private CharacterController characterController;
     private Animator animator;
     private Vector3 inputs;
+    public float sensitivity = 2.0f;
+    private float rotationX = 0.0f;
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        
     }
 
     private void Update()
     {
+        
         inputs.Set(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         inputs.Normalize();
         characterController.Move(inputs * Time.deltaTime * speed);
@@ -40,4 +44,22 @@ public class Zac_Moviment : MonoBehaviour
             animator.SetBool("Andando", false);
         }
     }
+
+
+    void RotateWithMouse()
+    {
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+
+        // Rotação horizontal do corpo do jogador
+        transform.Rotate(Vector3.up * mouseX * sensitivity);
+
+        // Rotação vertical da câmera, limitando o ângulo
+        rotationX -= mouseY * sensitivity;
+        rotationX = Mathf.Clamp(rotationX, -90.0f, 90.0f); // Ajuste o intervalo conforme necessário
+
+        // Aplicar rotação vertical à câmera
+        Camera.main.transform.localRotation = Quaternion.Euler(rotationX, 0.0f, 0.0f);
+    }
 }
+
