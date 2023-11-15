@@ -46,20 +46,5 @@ public class Zac_Moviment : MonoBehaviour
     }
 
 
-    void RotateWithMouse()
-    {
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
-
-        // Rotação horizontal do corpo do jogador
-        transform.Rotate(Vector3.up * mouseX * sensitivity);
-
-        // Rotação vertical da câmera, limitando o ângulo
-        rotationX -= mouseY * sensitivity;
-        rotationX = Mathf.Clamp(rotationX, -90.0f, 90.0f); // Ajuste o intervalo conforme necessário
-
-        // Aplicar rotação vertical à câmera
-        Camera.main.transform.localRotation = Quaternion.Euler(rotationX, 0.0f, 0.0f);
-    }
 }
 
