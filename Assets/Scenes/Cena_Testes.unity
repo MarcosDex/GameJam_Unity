@@ -323,6 +323,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!4 &320986176 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7919918893899340042, guid: f5ef9915c97277941aad6de0b431b1f4, type: 3}
+  m_PrefabInstance: {fileID: 7661157979977380858}
+  m_PrefabAsset: {fileID: 0}
 --- !u!143 &320986179
 CharacterController:
   m_ObjectHideFlags: 0
@@ -951,7 +956,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1208193364
 GameObject:
@@ -1299,7 +1304,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 10.26, y: 7.49}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 6.4996223
+  m_FocalLength: 8.0311775
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -1308,7 +1313,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 59.9
+  field of view: 50.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1334,11 +1339,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1492706888}
   m_LocalRotation: {x: 0.15426846, y: -0, z: -0, w: 0.98802906}
-  m_LocalPosition: {x: 16.53, y: 1.46, z: 18.31}
+  m_LocalPosition: {x: 16.515, y: 1.295, z: 18.257}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 17.749, y: 0, z: 0}
 --- !u!114 &1492706892
 MonoBehaviour:
@@ -1352,6 +1357,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26adb1a5650a94740b3e6ecce9fc9984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alvo: {fileID: 320986176}
+  sensibilidadeMouse: 5
+  rotacaoMinimaY: -80
+  rotacaoMaximaY: 80
 --- !u!1001 &1864785054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1622,7 +1631,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7919918893899340042, guid: f5ef9915c97277941aad6de0b431b1f4, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7919918893899340042, guid: f5ef9915c97277941aad6de0b431b1f4, type: 3}
       propertyPath: m_LocalPosition.x
