@@ -15,6 +15,7 @@ public class Interagir : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         RaycastHit hit;
         if(Physics.Raycast(transform.position, Vector3.down, out hit, 1))
         {
@@ -51,5 +52,15 @@ public class Interagir : MonoBehaviour
         }
         selectedLand= land;
         land.Select(true);
+    }
+
+    public void Interact()
+    {
+        if(selectedLand != null)
+        {
+            selectedLand.Interact();
+            return;
+        }
+        Debug.Log("Não esta em bloco interagivel");
     }
 }

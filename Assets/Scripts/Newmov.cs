@@ -10,14 +10,27 @@ public class Newmov : MonoBehaviour
     private Animator animator;
     private int inputXHash = Animator.StringToHash("inputX");
     private int inputYHash = Animator.StringToHash("inputY");
+
+
+
+
+
+    Interagir playerInteraction;
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        playerInteraction = GetComponentInChildren<Interagir>();
     }
 
     // Update is called once per frame
     void Update()
+    {
+        Movimento();
+        Interact();
+    }
+
+    public void Movimento()
     {
         inputX = Input.GetAxis("Horizontal");
         inputY = Input.GetAxis("Vertical");
@@ -26,5 +39,13 @@ public class Newmov : MonoBehaviour
         animator.SetFloat(inputYHash, inputY);
 
         characterController.Move(transform.TransformDirection(new Vector3(inputX, -1, inputY)).normalized * Time.deltaTime * 3);
+    }
+
+    public void Interact()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            playerInteraction.Interact();
+        }
     }
 }
