@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
                 GastarSemente(1);
                // Adicione aqui o código para criar o novo objeto
                CriarNovoObjeto_1();
-              CriarNovoObjeto_2();
+              
           }
            else
             {
