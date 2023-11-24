@@ -12,6 +12,7 @@ public class Land : MonoBehaviour
     public LandStatus landStatus;
     public Material start, molhado;
     new Renderer renderer;
+    public GameObject select;
     void Start()
     {
          renderer= gameObject.GetComponent<Renderer>();
@@ -35,5 +36,8 @@ public class Land : MonoBehaviour
 
         renderer.material = materialToSwitch;
     }
-
+    public void Select(bool toggle)
+    {
+        select.SetActive(toggle);
+    }
 }

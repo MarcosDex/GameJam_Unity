@@ -5,7 +5,7 @@ using UnityEngine;
 public class Interagir : MonoBehaviour
 {
     CharacterController playerController;
-    
+    Land selectedLand = null;
 
     void Start()
     {
@@ -25,5 +25,31 @@ public class Interagir : MonoBehaviour
     void onInteract(RaycastHit hit)
     {
         Debug.Log(hit);
+        Collider other = hit.collider;
+        Debug.Log(other);
+
+        if (other.tag == "Land")
+        {
+            Land land = other.GetComponent<Land>();
+            Select(land);
+            return;
+           
+        }
+
+        if(selectedLand != null)
+        {
+            selectedLand.Select(false);
+            selectedLand = null;
+        }
+    }
+
+    void Select(Land land)
+    {
+        if(selectedLand != null)
+        {
+            selectedLand.Select(false);
+        }
+        selectedLand= land;
+        land.Select(true);
     }
 }
