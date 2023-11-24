@@ -1807,6 +1807,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5834140555985555040, guid: 612aec41cd0239d49b64174a8ed15446, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9eae413843ec02246a58dbd8323bbd26, type: 2}
     - target: {fileID: 8878665860243924907, guid: 612aec41cd0239d49b64174a8ed15446, type: 3}
       propertyPath: m_Name
       value: Land 1
@@ -1815,10 +1819,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 8976972612724517727, guid: 612aec41cd0239d49b64174a8ed15446, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 33273026c145aae478af7343b9dd950a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 612aec41cd0239d49b64174a8ed15446, type: 3}
 --- !u!1001 &7661157979977380858
