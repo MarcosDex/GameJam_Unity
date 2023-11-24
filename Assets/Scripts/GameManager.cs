@@ -41,56 +41,56 @@ public class GameManager : MonoBehaviour
         SeedsTxt.text = "Sementes: " + seeds.ToString();
     }
 
+   void Update()
+    { 
+        if (Input.GetMouseButtonDown(0))
+        {
+            // Verifica se o jogador tem mais de uma semente antes de gastar
+           if (seeds >= 1)
+            {
+                GastarSemente(1);
+               // Adicione aqui o código para criar o novo objeto
+               CriarNovoObjeto_1();
+              CriarNovoObjeto_2();
+          }
+           else
+            {
+            Debug.Log("Você precisa ter mais de uma semente para plantar!");
+          }
+        }
+    }
     //void Update()
     //{
     //    if (Input.GetMouseButtonDown(0))
     //    {
-    //        // Verifica se o jogador tem mais de uma semente antes de gastar
-    //        if (seeds >= 1)
+    //        // Raycast para verificar se o objeto original está na linha de visão
+    //        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    //        RaycastHit hit;
+
+    //        if (Physics.Raycast(ray, out hit))
     //        {
-    //            GastarSemente(1);
-    //            // Adicione aqui o código para criar o novo objeto
-    //            CriarNovoObjeto_1();
-    //            CriarNovoObjeto_2();
-    //        }
-    //        else
-    //        {
-    //            Debug.Log("Você precisa ter mais de uma semente para plantar!");
+    //            if (hit.collider.gameObject == objetoOriginal)
+    //            {
+    //                // Verifica se o jogador tem mais de uma semente antes de gastar
+    //                if (seeds >= 1)
+    //                {
+    //                    GastarSemente(1);
+    //                    // Adicione aqui o código para criar o novo objeto
+    //                    CriarNovoObjeto_1();
+    //                    CriarNovoObjeto_2();
+    //                }
+    //                else
+    //                {
+    //                    Debug.Log("Você precisa ter mais de uma semente para plantar!");
+    //                }
+    //            }
+    //            else
+    //            {
+    //                Debug.Log("Você não está olhando para o objeto original!");
+    //            }
     //        }
     //    }
     //}
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            // Raycast para verificar se o objeto original está na linha de visão
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.collider.gameObject == objetoOriginal)
-                {
-                    // Verifica se o jogador tem mais de uma semente antes de gastar
-                    if (seeds >= 1)
-                    {
-                        GastarSemente(1);
-                        // Adicione aqui o código para criar o novo objeto
-                        CriarNovoObjeto_1();
-                        CriarNovoObjeto_2();
-                    }
-                    else
-                    {
-                        Debug.Log("Você precisa ter mais de uma semente para plantar!");
-                    }
-                }
-                else
-                {
-                    Debug.Log("Você não está olhando para o objeto original!");
-                }
-            }
-        }
-    }
 
     void CriarNovoObjeto_1()
     {
